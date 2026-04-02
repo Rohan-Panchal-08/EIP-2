@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Google Maps Clone{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    <!-- Scripts -->
+    <script>
+        // Global variables for Django template variables
+        const isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
+        const csrfToken = '{{ csrf_token }}';
+        const getLocationsUrl = "{% url 'get_locations' %}";
+        const saveLocationUrl = "{% url 'save_location' %}";
+        const deleteLocationUrl = "{% url 'delete_location' 0 %}".replace('/0/', '/');
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
